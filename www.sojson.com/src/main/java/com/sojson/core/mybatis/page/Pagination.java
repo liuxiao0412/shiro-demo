@@ -57,7 +57,7 @@ public class Pagination<T> extends SimplePage implements java.io.Serializable,
 
 	
 	/**SOJSON SEO 翻页版本*/
-	public String getWebPage(String page){
+	/*public String getWebPage(String page){
 		StringBuffer pageHtml = new StringBuffer("<ul class='pagination'>");
 		if(this.getPageNo()>1){
 			if(this.getPageNo()>5){
@@ -77,12 +77,12 @@ public class Pagination<T> extends SimplePage implements java.io.Serializable,
 		}
 		pageHtml.append("</ul>");
 		return pageHtml.toString();
-	}
+	}*/
 	
 	
 	
 	/**Ajxa翻页*/
-	public String getSiAjaxPageHtml(){
+	/*public String getSiAjaxPageHtml(){
 		StringBuffer pageHtml = new StringBuffer("<ul class='pagination'>");
 		if(this.getPageNo()>1){
 			if(this.getPageNo()>5){
@@ -103,9 +103,9 @@ public class Pagination<T> extends SimplePage implements java.io.Serializable,
 		pageHtml.append("</ul>");
 		return pageHtml.toString();
 	}
-	
+	*/
 	/**普通翻页*/
-	public String getPageHtml(){
+	/*public String getPageHtml(){
 		StringBuffer pageHtml = new StringBuffer("<ul class='pagination'>");
 		if(this.getPageNo()>1){
 			if(this.getPageNo()>5){
@@ -131,7 +131,7 @@ public class Pagination<T> extends SimplePage implements java.io.Serializable,
 		pageHtml.append("</script>");
 		
 		return pageHtml.toString();
-	}
+	}*/
 	
 	
 }

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sojson.order.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.sojson.order.model.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="orderno" property="orderno" jdbcType="VARCHAR" />
+    <result column="delivery" property="delivery" jdbcType="VARCHAR" />
+    <result column="carnum" property="carnum" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="salesman" property="salesman" jdbcType="VARCHAR" />
+    <result column="istax" property="istax" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creator" property="createTor" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="updator" property="updaTor" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, orderno, delivery, carnum, tel,salesman,istax,type,create_time,creator, update_time,updator,status
+  </sql>
+  <sql id="limit_sql">
+  	   <if test="page_sql != null and page_sql != ''">
+      	${page_sql}
+      </if>
+  </sql>
+  
+  <sql id="where_all">
+  	<where>
+  	<if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(orderno) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")) or
+        LOWER(delivery) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+      </where>
+  </sql>
+  <select id="findAll" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from order 
+    <include refid="where_all"/>
+    <include refid="limit_sql" />
+  </select>
+  <select id="findCount" resultMap="BaseResultMap" >
+ 	 select count(id) from  product
+  	<include refid="where_all" />
+  </select>
+  
+  <select id="list" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from order 
+    
+  </select>
+  
+  
+  <!-- 用户权限分配的分页查询 -->
+  <select id="findUserAndRole" resultType="com.sojson.permission.bo.UserRoleAllocationBo">
+  	select u.id,u.nickname,u.email,u.create_time,u.last_login_time,u.status ,group_concat(ur.name) roleNames,group_concat(ur.id)roleIds from
+	 u_user u
+	left join u_user_role uur on uur.uid = u.id
+	left join u_role ur on ur.id = uur.rid
+	<where>
+  	<if test="findContent != null and findContent !='' " >
+        and (
+        LOWER(u.nickname) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%")) or
+        LOWER(u.email) like  LOWER(CONCAT("%",#{findContent,jdbcType=VARCHAR},"%"))
+        )
+      </if>
+      </where>
+	group by u.id 
+  </select>
+  <select id="selectRoleByUserId" resultType="com.sojson.permission.bo.URoleBo">
+  		
+		select ur.id,ur.name,ur.type,ifnull(uu.id,0)marker,uu.id userId from u_role ur
+		left join u_user_role uur on uur.rid = ur.id
+		left join (select id from u_user where id =#{id,jdbcType=BIGINT}) uu on uu.id = uur.uid
+		group by ur.id
+  		<!-- 
+  		勾选不上自己调整sql语句，由于mysql版本不同，所以不支持，可以看看Demo项目 http://shiro.itboy.net
+  		select ur.id,ur.name,ur.type,ifnull(uur.uid,0) marker from u_role ur
+		left join(select * from u_user_role where uid=#{id,jdbcType=BIGINT}) uur on uur.rid = ur.id
+		 -->
+  </select>
+  
+  <!-- 登录 -->
+  <select id="login" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where email = #{email,jdbcType=VARCHAR} and  pswd = #{pswd,jdbcType=VARCHAR} 
+  </select>
+  <!-- 根据邮箱|帐号查询 -->
+  <select id="findUserByEmail" resultMap="BaseResultMap" >
+  	 select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where email = #{email,jdbcType=VARCHAR} 
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from u_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.common.model.UUser" >
+    insert into u_user (id, nickname, email, 
+      pswd, create_time, last_login_time,status
+      )
+    values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{pswd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP},#{status,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.sojson.prod.model.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prodName != null" >
+        prod_name,
+      </if>
+      <if test="prodArea != null" >
+        prod_area,
+      </if>
+      <if test="material != null" >
+        material,
+      </if>
+      <if test="specifications != null" >
+        specifications,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createTor != null" >
+        creator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updaTor != null" >
+        updator,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="prodName != null" >
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodArea != null" >
+        #{prodArea,jdbcType=VARCHAR},
+      </if>
+      <if test="material != null" >
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null" >
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTor != null" >
+        #{createTor,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaTor != null" >
+        #{updaTor,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sojson.common.model.UUser" >
+    update u_user
+    <set >
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pswd != null" >
+        pswd = #{pswd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sojson.common.model.UUser" >
+    update u_user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      pswd = #{pswd,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

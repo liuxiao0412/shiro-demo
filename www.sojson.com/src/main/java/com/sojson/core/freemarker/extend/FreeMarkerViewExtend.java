@@ -34,6 +34,6 @@ public class FreeMarkerViewExtend extends FreeMarkerView {
 		model.put("_v", Constant.VERSION);//版本号，重启的时间
 		model.put("cdn", Constant.DOMAIN_CDN);//CDN域名
 		model.put("basePath", request.getContextPath());//base目录。
-		
+		//System.out.println(model.get("basePath"));
 	}
 }

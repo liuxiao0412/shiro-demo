@@ -1,0 +1,220 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>单据打印</title>
+    <script language="javascript" src="jquery.min.js"></script>
+    <!--
+    如果您使用的是高版本jQuery调用下面jQuery迁移辅助插件即可-->
+    <script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+
+    <script language="javascript" src="jquery.jqprint-0.3.js"></script>
+
+    <script language="javascript">
+
+        function aa() {
+            $("#ddd").jqprint({
+                importCSS: true
+            });
+        }
+    </script>
+
+    <link href="print.css" rel="stylesheet" type="text/css" media="print"/>
+
+
+    <style type="text/css" >
+
+
+        table.gridtable {
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
+
+        table.gridtable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+
+        table.gridtable td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div id="ddd">
+
+
+
+    <table class="gridtable" width="1050" height="571">
+        <tr height="34">
+            <td height="34"></td>
+            <td colspan="11" x:str="x:str" height="34" width="977">结 算 单</td>
+        </tr>
+        <tr height="28">
+            <td rowspan="15" x:str="x:str" height="495" width="47">白联：存根 红联：客户 黄联：财务 </td>
+            <td height="28" width="50"></td>
+            <td x:str="x:str" height="28" width="155">仓库：烽火库</td>
+            <td height="28" width="76"></td>
+            <td height="28" width="70"></td>
+            <td height="28" width="92"></td>
+            <td x:str="x:str" height="28" width="144"> </td>
+            <td height="28" width="131"></td>
+            <td height="28"></td>
+            <td height="28"></td>
+            <td colspan="2" x:str="x:str" height="28" width="144">NO:</td>
+        </tr>
+        <tr height="30">
+            <td colspan="5" rowspan="2" x:str="x:str" height="62" width="401">提货单位：</td>
+            <td colspan="4" x:str="x:str" height="30" width="502">车号：</td>
+            <td colspan="2" rowspan="2" height="62" width="144"></td>
+        </tr>
+        <tr height="32">
+            <td colspan="4" x:str="x:str" height="32" width="502">电话：</td>
+        </tr>
+        <tr height="32">
+            <td x:str="x:str" height="32" width="50">序号</td>
+            <td x:str="x:str" height="32" width="155">品名及规格</td>
+            <td x:str="x:str" height="32" width="76">件数</td>
+            <td x:str="x:str" height="32" width="70">支/件</td>
+            <td x:str="x:str" height="32" width="92">重量/件</td>
+            <td x:str="x:str" height="32" width="144">总重量（T）</td>
+            <td x:str="x:str" height="32" width="131">单价（元）</td>
+            <td colspan="2" x:str="x:str" height="32" width="166">金额（元）</td>
+            <td colspan="2" x:str="x:str" height="32" width="144">备注</td>
+        </tr>
+        <tr height="32">
+            <td x:num="1" height="32" width="50">1</td>
+            <td x:str="x:str" height="32" width="155">Φ14华航</td>
+            <td x:num="210" height="32" width="76">210</td>
+            <td x:num="168" height="32" width="70">168</td>
+            <td x:num="1.83" height="32" width="92">1.83</td>
+            <td x:num="384.3" height="32" width="144">384.3</td>
+            <td x:num="3530" height="32" width="131">3530</td>
+            <td colspan="2" x:num="1356579" height="32" width="166">1356579</td>
+            <td colspan="2" rowspan="9" x:str="x:str" height="288" width="144"><br />
+                <br />
+                           
+                预付200万<br />
+                                          
+                应退款77330元    </td>
+        </tr>
+        <tr height="32">
+            <td x:num="2" height="32" width="50">2</td>
+            <td x:str="x:str" height="32" width="155">Φ25华航</td>
+            <td x:num="93" height="32" width="76">93</td>
+            <td x:num="50" height="32" width="70">50</td>
+            <td x:num="1.733" height="32" width="92">1.733</td>
+            <td x:num="161.169" height="32" width="144">161.169</td>
+            <td x:num="3500" height="32" width="131">3500</td>
+            <td colspan="2" x:num="564091" height="32" width="166">564091</td>
+        </tr>
+        <tr height="32">
+            <td x:num="3" height="32" width="50">3</td>
+            <td x:str="x:str" height="32" width="155">船</td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td height="32" width="144"></td>
+            <td height="32" width="131"></td>
+            <td colspan="2" x:num="2000" height="32" width="166">2000</td>
+        </tr>
+        <tr height="32">
+            <td x:num="4" height="32" width="50">4</td>
+            <td x:str="x:str" height="32" width="155">Φ22螺纹</td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td x:num="0" height="32" width="144">0</td>
+            <td x:num="3430" height="32" width="131">3430</td>
+            <td colspan="2" x:num="0" height="32" width="166">0</td>
+        </tr>
+        <tr height="32">
+            <td x:num="5" height="32" width="50">5</td>
+            <td x:str="x:str" height="32" width="155">Φ25螺纹</td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td x:num="0" height="32" width="144">0</td>
+            <td x:num="3430" height="32" width="131">3430</td>
+            <td colspan="2" x:num="0" height="32" width="166">0</td>
+        </tr>
+        <tr height="32">
+            <td x:num="6" height="32" width="50">6</td>
+            <td x:str="x:str" height="32" width="155">Φ22圆钢</td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td x:num="0" height="32" width="144">0</td>
+            <td x:num="3800" height="32" width="131">3800</td>
+            <td colspan="2" height="32" width="166"></td>
+        </tr>
+        <tr height="32">
+            <td x:num="7" height="32" width="50">7</td>
+            <td height="32" width="155"></td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td height="32" width="144"></td>
+            <td height="32" width="131"></td>
+            <td colspan="2" height="32" width="166"></td>
+        </tr>
+        <tr height="32">
+            <td x:num="8" height="32" width="50">8</td>
+            <td height="32" width="155"></td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td x:num="0" height="32" width="144">0</td>
+            <td x:num="4050" height="32" width="131">4050</td>
+            <td colspan="2" x:num="0" height="32" width="166">0</td>
+        </tr>
+        <tr height="32">
+            <td x:num="9" height="32" width="50">9</td>
+            <td x:str="x:str" height="32" width="155">Φ6.5线材 </td>
+            <td height="32" width="76"></td>
+            <td height="32" width="70"></td>
+            <td height="32" width="92"></td>
+            <td x:num="0" height="32" width="144">0</td>
+            <td x:num="3860" height="32" width="131">3860</td>
+            <td colspan="2" x:num="0" height="32" width="166">0</td>
+        </tr>
+        <tr height="40">
+            <td colspan="4" x:str="x:str" height="40" width="331">合计件数/吨位</td>
+            <td x:num="303" height="40" width="92">303</td>
+            <td x:num="545.469" height="40" width="144">545.469</td>
+            <td x:str="x:str" height="40" width="131">合计金额</td>
+            <td colspan="2" x:num="1922670" height="40" width="166">1922670 </td>
+            <td colspan="2" height="40" width="144"></td>
+        </tr>
+        <tr height="45">
+            <td colspan="4" x:str="x:str" height="45" width="331">开票人（签字） </td>
+            <td colspan="2" x:str="x:str" height="45" width="184">销售员  </td>
+            <td colspan="5" x:str="x:str" height="45" width="471">提货人(签字）</td>
+        </tr>
+        <tr height="42">
+            <td height="42"></td>
+            <td colspan="11" x:str="x:str" height="42" width="977">注：一:本销售单等同于购销合同，提货人签字生效。二：付款方式为未结的，本销售单等同于欠条。三：货物出库请当面点清，出库后概不负责。四：质量异议，请在三日内提出，逾期本公司不负任何责任。五：逾期七日不付款，每天按提货金额的2‰计利息。</td>
+        </tr>
+    </table>
+
+
+
+</div>
+<input type="button" onclick="aa()" value="打印"/>
+</body>
+</html>

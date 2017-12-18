@@ -25,7 +25,7 @@ import net.sf.json.JSONObject;
  */
 public class UUserRole  implements Serializable{
 	private static final long serialVersionUID = 1L;
-	 /**{@link UUser.id}*/
+	 /**{@link Stock.id}*/
     private Long uid;
     /**{@link URole.id}*/
     private Long rid;

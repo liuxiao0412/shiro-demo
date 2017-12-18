@@ -56,7 +56,8 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="mapperLocations"  >
 			<list>
-				<value>classpath:com/sojson/common/mapper/*.xml</value>
+				<!-- <value>classpath:com/sojson/common/mapper/*.xml</value> -->
+				<value>classpath:com/sojson/*/mapper/*.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -68,7 +69,7 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.sojson.common.dao" />
+		<property name="basePackage" value="com.sojson.*.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
